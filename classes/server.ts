@@ -5,6 +5,7 @@ import http from 'http';
 
 import * as socket from '../sockets/sockets';
 
+
 export default class Server {
 
   private static _instance: Server;
@@ -37,7 +38,11 @@ export default class Server {
 
     this.io.on('connection', cliente => {
 
-      console.log('Cliente conectado');
+      // Conectar cliente
+      socket.conectarCliente( cliente );
+
+      // Configurar usuario
+      socket.configurarUsuario( cliente, this.io );
 
       // Mensaje
       socket.mensaje( cliente, this.io );
